@@ -53,8 +53,8 @@ public class CheckersGameController implements Initializable {
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                checkerboard.setWidth(newSceneWidth.doubleValue());
-                System.out.println("New Width: " + newSceneWidth.doubleValue());
+                double changeDelta = newSceneWidth.doubleValue() - oldSceneWidth.doubleValue();
+                checkerboard.setWidth(checkerboard.getWidth() + changeDelta);
                 buildAndReplace();
             }
         });
@@ -62,8 +62,9 @@ public class CheckersGameController implements Initializable {
         scene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                checkerboard.setHeight(newSceneHeight.doubleValue() - menuBar.getHeight());
-                System.out.println("New Height: " + newSceneHeight.doubleValue());
+                // TODO Generalize so this doesn't depend on this exact setup of menubar followed by checkerboard
+                double changeDelta = newSceneHeight.doubleValue() - oldSceneHeight.doubleValue();
+                checkerboard.setHeight(checkerboard.getHeight() + changeDelta);
                 buildAndReplace();
             }
         });
@@ -71,7 +72,12 @@ public class CheckersGameController implements Initializable {
     
     private void buildAndReplace() {
         AnchorPane newCheckerboard = checkerboard.build();
-        vBox.getChildren().remove(anchorPane);
+        if(vBox.getChildren().contains(anchorPane))
+            vBox.getChildren().remove(anchorPane);
+        
+        // Set settings for the checkerboard ui
+        VBox.setVgrow(newCheckerboard, Priority.ALWAYS);
+        
         vBox.getChildren().add(newCheckerboard);
         anchorPane = newCheckerboard;
     }
