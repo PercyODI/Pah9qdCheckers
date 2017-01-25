@@ -32,8 +32,6 @@ public class Checkerboard {
         setHeight(boardHeight);
 //        this.boardWidth = boardWidth;
 //        this.boardHeight = boardHeight;
-//        
-        
 //        rectangleWidth = boardWidth / numCols;
 //        rectangleHeight = boardHeight / numRows;
     }
@@ -48,6 +46,10 @@ public class Checkerboard {
         // Create a new AnchorPane
         AnchorPane newAnchorPane = new AnchorPane();
         
+        // Calculate Rectangle Width and Height
+        rectangleWidth = calcRectangleWidth();
+        rectangleHeight = calcRectangleHeight();
+        
         // For Each Row
         for(int row = 0; row < numRows; row++) {
             // For Each Column in Row
@@ -57,9 +59,9 @@ public class Checkerboard {
                 
                 // Determine Color
                 if((row + col) % 2 == 0) {
-                    newRect.setFill(darkColor);
-                } else {
                     newRect.setFill(lightColor);
+                } else {
+                    newRect.setFill(darkColor);
                 }
                 
                 // Position Rectangle
@@ -82,8 +84,16 @@ public class Checkerboard {
         return numRows;
     }
     
+    public void setNumRows(int numRows) {
+        this.numRows = numRows;
+    }
+    
     public int getNumCols() {
         return numCols;
+    }
+    
+    public void setNumCols(int numCols) {
+        this.numCols = numCols;
     }
     
     public double getWidth() {
@@ -92,7 +102,6 @@ public class Checkerboard {
     
     public void setWidth(double width) {
         boardWidth = width;
-        rectangleWidth = boardWidth / numCols;
     }
     
     public double getHeight() {
@@ -101,15 +110,22 @@ public class Checkerboard {
     
     public void setHeight(double height) {
         boardHeight = height;
-        rectangleHeight = boardHeight / numRows;
     }
     
     public Color getLightColor() {
         return lightColor;
     }
+
+    void setLightColor(Color lightColor) {
+        this.lightColor = lightColor;
+    }
     
     public Color getDarkColor() {
         return darkColor;
+    }
+
+    void setDarkColor(Color darkColor) {
+        this.darkColor = darkColor;
     }
     
     public double getRectangleWidth() {
@@ -118,6 +134,14 @@ public class Checkerboard {
     
     public double getRectangleHeight() {
         return rectangleHeight;
+    }
+    
+    private double calcRectangleWidth() {
+        return boardWidth / numCols;
+    }
+    
+    private double calcRectangleHeight() {
+        return boardHeight / numRows;
     }
     
 }

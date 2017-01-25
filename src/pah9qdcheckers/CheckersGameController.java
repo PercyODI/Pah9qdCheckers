@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -65,14 +67,57 @@ public class CheckersGameController implements Initializable {
                 buildAndReplace();
             }
         });
-        
     }
     
-    void buildAndReplace() {
+    private void buildAndReplace() {
         AnchorPane newCheckerboard = checkerboard.build();
         vBox.getChildren().remove(anchorPane);
         vBox.getChildren().add(newCheckerboard);
         anchorPane = newCheckerboard;
     }
+    
+    private void changeNumRowsAndCols(int numRows, int numCols) {
+        checkerboard.setNumRows(numRows);
+        checkerboard.setNumCols(numCols);
+        buildAndReplace();
+    }
+    
+    private void changeColorScheme(Color lightColor, Color darkColor) {
+        checkerboard.setLightColor(lightColor);
+        checkerboard.setDarkColor(darkColor);
+        buildAndReplace();
+    }
+    
+    // Set Menu Handlers
+    @FXML
+    private void handleSixteenGrid(ActionEvent event) {
+        changeNumRowsAndCols(16, 16);
+    }
+    
+    @FXML
+    private void handleTenGrid(ActionEvent event) {
+        changeNumRowsAndCols(10, 10);
+    }
+    
+    @FXML
+    private void handleEightGrid(ActionEvent event) {
+        changeNumRowsAndCols(8, 8);
+    }
+    
+    @FXML
+    private void handleThreeGrid(ActionEvent event) {
+        changeNumRowsAndCols(3, 3);
+    }
+    
+    @FXML
+    private void handleDefaultColors(ActionEvent event) {
+        changeColorScheme(Color.RED, Color.BLACK);
+    }
+    
+    @FXML
+    private void handleBlueColors(ActionEvent event) {
+        changeColorScheme(Color.SKYBLUE, Color.DARKBLUE);
+    }
+    
     
 }
