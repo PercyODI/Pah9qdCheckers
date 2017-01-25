@@ -19,12 +19,18 @@ public class Pah9qdCheckers extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CheckersGame.fxml"));
+        Parent root = loader.load();
+        CheckersGameController controller = loader.getController();
+        
+        //Parent root = FXMLLoader.load(getClass().getResource("Grid.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
+        
+        controller.ready(scene);
     }
 
     /**
