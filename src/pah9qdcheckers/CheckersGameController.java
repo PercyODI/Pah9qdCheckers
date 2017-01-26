@@ -50,23 +50,17 @@ public class CheckersGameController implements Initializable {
         checkerboard = new Checkerboard(8, 8, anchorPane.getWidth(), anchorPane.getHeight());
         buildAndReplace();
         
-        scene.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                double changeDelta = newSceneWidth.doubleValue() - oldSceneWidth.doubleValue();
-                checkerboard.setWidth(checkerboard.getWidth() + changeDelta);
-                buildAndReplace();
-            }
+        scene.widthProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) -> {
+            double changeDelta = newSceneWidth.doubleValue() - oldSceneWidth.doubleValue();
+            checkerboard.setWidth(checkerboard.getWidth() + changeDelta);
+            buildAndReplace();
         });
         
-        scene.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                // TODO Generalize so this doesn't depend on this exact setup of menubar followed by checkerboard
-                double changeDelta = newSceneHeight.doubleValue() - oldSceneHeight.doubleValue();
-                checkerboard.setHeight(checkerboard.getHeight() + changeDelta);
-                buildAndReplace();
-            }
+        scene.heightProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) -> {
+            // TODO Generalize so this doesn't depend on this exact setup of menubar followed by checkerboard
+            double changeDelta = newSceneHeight.doubleValue() - oldSceneHeight.doubleValue();
+            checkerboard.setHeight(checkerboard.getHeight() + changeDelta);
+            buildAndReplace();
         });
     }
     
