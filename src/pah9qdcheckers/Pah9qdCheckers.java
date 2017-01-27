@@ -28,6 +28,7 @@ public class Pah9qdCheckers extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("Pah9qdCheckers");
         stage.show();
         
         controller.ready(scene);
